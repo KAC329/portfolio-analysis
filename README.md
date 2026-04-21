@@ -109,8 +109,9 @@ quantitative-portfolio-analysis/
 ├── results/                                # Charts, tables, backtest results
 ├── requirements.txt
 └── README.md
----
 ```
+---
+
 ## Data Sources
 
 | Source | Access | Data |
