@@ -92,6 +92,7 @@ quantitative research practice.
 
 ## Repository Structure
 
+'''
 quantitative-portfolio-analysis/
 │
 ├── notebooks/
