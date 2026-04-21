@@ -92,7 +92,7 @@ quantitative research practice.
 
 ## Repository Structure
 
-'''
+```
 quantitative-portfolio-analysis/
 │
 ├── notebooks/
@@ -110,7 +110,7 @@ quantitative-portfolio-analysis/
 ├── requirements.txt
 └── README.md
 ---
-
+```
 ## Data Sources
 
 | Source | Access | Data |
