@@ -57,15 +57,32 @@ def _download_fred(series: list[str], start: str) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------- loaders
-def load_prices(refresh: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Adjusted close and volume, one column per holding (NaN before listing)."""
+def load_prices(refresh: bool = False, raw: bool = False) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Adjusted close and volume, one column per holding (NaN before listing).
+
+    ``raw=True`` skips the documented overrides (used by the data-quality table).
+    """
     if refresh or not _PRICE_FILE.exists():
         close, volume = _download_yahoo(C.TICKERS, C.START)
         close.to_csv(_PRICE_FILE)
         volume.to_csv(_VOLUME_FILE)
     close = pd.read_csv(_PRICE_FILE, index_col=0, parse_dates=True)
     volume = pd.read_csv(_VOLUME_FILE, index_col=0, parse_dates=True)
-    return clean_prices(close), volume.reindex_like(close)
+    close = clean_prices(close)
+    if not raw:
+        close = apply_overrides(close)
+    return close, volume.reindex_like(close).where(close.notna())
+
+
+def apply_overrides(close: pd.DataFrame) -> pd.DataFrame:
+    close = close.copy()
+    for t, d in C.TRADING_START.items():
+        if t in close:
+            close.loc[close.index < pd.Timestamp(d), t] = np.nan
+    for t in C.EXCLUDE:
+        if t in close:
+            close[t] = np.nan
+    return close
 
 
 def load_market(refresh: bool = False) -> pd.DataFrame:

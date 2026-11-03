@@ -161,16 +161,108 @@ statistically, as a foundation for later modelling.
 > them. Returns usually *are* stationary. The ADF test checks this formally
 > (p < 0.05 means "stationary"). This is why every model here uses returns.
 
-**Results.** *Pending price data.* Will include: `p1_asset_stats`,
-`p1_portfolio_vs_benchmark` (full period and 3 years), growth and drawdown
-charts, return-contribution chart, correlation heatmap, ADF table,
-ACF/PACF figure, Ljung-Box table.
+**Results.**
 
-**Interpretation.** *Pending.*
+*Table 2.1 — Portfolio vs benchmark* (equal weight, monthly rebalance, net of costs)
 
-**Caveats.** Equal weight is an assumption, not your actual allocation. Holdings
-with less than 3 years of history (OKLO, SOLS, PSKY) are excluded from the
-3-year comparison and the correlation matrix.
+| | Period | CAGR | Volatility | Sharpe | Sortino | Max drawdown | Beta | Alpha (ann.) | Info ratio |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| **Portfolio (EW)** | Jan 2016 – Nov 2026 | **23.7%** | 22.1% | **0.97** | 1.41 | −36.5% | 1.09 | 7.2% | 0.77 |
+| VOO (S&P 500) | Jan 2016 – Nov 2026 | 14.8% | 17.7% | 0.73 | 1.03 | −34.0% | 1.00 | — | — |
+| **Portfolio (EW)** | last 3 years | **45.2%** | 23.6% | **1.51** | 2.38 | −21.1% | 1.28 | 14.2% | 1.29 |
+| VOO (S&P 500) | last 3 years | 22.2% | 14.8% | 1.13 | 1.66 | −18.7% | 1.00 | — | — |
+
+![Growth of $10,000](../results/figures/p1_growth.png)
+![Drawdown](../results/figures/p1_drawdown.png)
+
+*Table 2.2 — Holdings ranked by Sharpe ratio, last 3 years* (full table incl.
+each holding's whole history: `results/tables/p1_asset_stats.md`)
+
+| Holding | CAGR | Volatility | Sharpe | Max drawdown | Beta |
+|---|---:|---:|---:|---:|---:|
+| PLTR | 114.5% | 64.0% | 1.43 | −48.2% | 2.15 |
+| NVDA | 68.8% | 46.7% | 1.26 | −36.9% | 2.12 |
+| QTUM | 43.5% | 29.4% | 1.22 | −25.4% | 1.58 |
+| QBTS | 120.5% | 132.5% | 1.19 | −77.5% | 2.88 |
+| VOO | 22.2% | 14.8% | 1.13 | −18.7% | 1.00 |
+| VTI | 22.0% | 15.3% | 1.09 | −19.3% | 1.03 |
+| VEA | 20.3% | 15.7% | 0.98 | −13.5% | 0.82 |
+| VO | 19.0% | 14.5% | 0.97 | −19.0% | 0.87 |
+| VB | 18.7% | 18.6% | 0.78 | −25.4% | 1.07 |
+| VWO | 15.9% | 16.5% | 0.71 | −17.4% | 0.78 |
+| META | 26.4% | 38.5% | 0.68 | −34.2% | 1.48 |
+| AMZN | 22.4% | 31.9% | 0.65 | −30.9% | 1.43 |
+| IBM | 23.1% | 35.3% | 0.65 | −37.5% | 0.78 |
+| MSFT | 15.4% | 26.2% | 0.51 | −34.5% | 1.02 |
+| VCIT | 6.3% | 5.2% | 0.35 | −4.9% | 0.11 |
+| HON | 8.9% | 23.1% | 0.30 | −22.1% | 0.73 |
+| JD | 4.7% | 43.4% | 0.22 | −44.5% | 0.82 |
+| WDAY | −2.3% | 41.7% | 0.05 | −63.4% | 0.81 |
+
+*OKLO (2.5 years since its merger) and SOLS (1 year) are excluded here. Over
+their own short histories: OKLO CAGR 50.9%, volatility 117%, worst drawdown
+−86.6%; SOLS CAGR 26.9%, volatility 54.7%.*
+
+![Return contribution](../results/figures/p1_contribution.png)
+![Correlation matrix](../results/figures/p1_correlation.png)
+
+*Table 2.3 — Diversification (last 3 years)*
+
+| Measure | Value | Meaning |
+|---|---:|---|
+| Average pairwise correlation | 0.38 | Holdings move together moderately |
+| Diversification ratio | 1.65 | Portfolio volatility is 1/1.65 of the average holding's |
+| Effective number of independent bets | **2.7** | 18 holdings behave like fewer than 3 independent ones |
+| Most correlated pair | VOO / VTI, 0.996 | Practically the same fund |
+| Least correlated pair | JD / WDAY, 0.07 | |
+
+*Table 2.4 — Time-series tests* (tables: `p1_adf.md`, `p1_ljung_box.md`)
+
+| Test | Result |
+|---|---|
+| ADF on log prices | **0 of 20** holdings stationary (p > 0.05 for all) |
+| ADF on log returns | **20 of 20** stationary (p < 0.001) |
+| Ljung-Box on returns, 10 lags | 15 of 18 show small but significant autocorrelation |
+| Ljung-Box on squared returns | **18 of 18** show volatility clustering |
+
+![ACF and PACF](../results/figures/p1_acf_pacf.png)
+
+**Interpretation.**
+1. **The portfolio beat the S&P 500 by a wide margin, mostly by taking more
+   market risk.** It returned 23.7% a year against 14.8% since 2016, and 45.2%
+   against 22.2% over the last 3 years. Its beta rose from 1.09 to 1.28 over
+   the last 3 years, so it now behaves like a 1.3× leveraged index fund. That
+   amplifies falls as well as gains: its worst drawdown (−36.5%) was deeper
+   than the S&P's.
+2. **A few names did most of the work.** QBTS, PLTR and NVDA together
+   supplied about 18 of the portfolio's roughly 34 percentage points of
+   annual return over the last 3 years. The result depends heavily on a small
+   group of AI and quantum stocks continuing to do well.
+3. **Volatility destroys compound returns.** QBTS has a positive Sharpe ratio
+   over its full history (0.63), yet it compounded at only **0.6% a year**
+   since its 2022 listing. With 146% volatility, its −96.7% drawdown needed
+   roughly a 30× rebound just to break even. See the concept box below.
+4. **There is less diversification than 18 holdings suggest.** The effective
+   number of independent bets is only 2.7. VOO and VTI are 99.6% correlated,
+   so holding both adds cost and complexity but no diversification. VCIT (the
+   bond ETF) is the only holding that meaningfully cushions equity falls.
+5. **The time-series facts match Shumway & Stoffer.** Prices wander
+   (non-stationary) and returns don't, which is why every later model uses
+   returns. Returns themselves are barely predictable from their own past (the
+   ACF bars sit near zero). But **volatility is highly persistent**: the ACF of
+   squared returns decays slowly over about 20 days. That is why Phase 4
+   forecasts *risk* far more reliably than *returns*.
+
+> **📘 Concept — volatility drag.** If a stock gains 50% and then loses 50%,
+> its average return is 0%, but you are down 25% (1.5 × 0.5 = 0.75).
+> Approximately, compound growth ≈ average return − ½ × volatility². At 146%
+> volatility the drag is about 107 percentage points a year, enough to wipe
+> out a very high average return.
+
+**Caveats.** Equal weight is an assumption, not your actual allocation. The
+3-year window excludes holdings with shorter histories (OKLO, SOLS) and the two
+with unusable data (SKYT, PSKY). Ljung-Box tests use the full history, which
+includes the 2020 crash, and crises inflate measured autocorrelation.
 
 ---
 
@@ -196,10 +288,52 @@ return, and test whether that advantage survives when weights are chosen
 > for a typical stock). It will over-weight whatever happened to do well. Part B
 > measures how much of the promised improvement is real.
 
-**Results.** *Pending.* Tables `p2_insample_portfolios`, `p2_weights`,
-`p2_oos_backtest`; charts `p2_frontier`, `p2_weights`, `p2_oos_growth`.
+**Results.**
 
-**Interpretation.** *Pending.*
+*Table 3.1 — In-sample (Nov 2023 – Nov 2026, 18 holdings, risk-free 4.4%)*
+
+| Portfolio | Expected return | Volatility | Sharpe | Largest weight | Holdings > 1% |
+|---|---:|---:|---:|---|---:|
+| Current (equal weight) | 34.2% | 20.5% | 1.46 | 5.6% each | 18 |
+| **Max Sharpe** | 61.2% | 31.3% | **1.81** | NVDA 25% | 6 |
+| Min volatility | 14.8% | 11.0% | 0.95 | VCIT 25% | 9 |
+| Best of 10,000 random | 50.5% | 26.6% | 1.73 | — | — |
+
+![Efficient frontier](../results/figures/p2_frontier.png)
+![Weights](../results/figures/p2_weights.png)
+
+The max-Sharpe portfolio puts 25% in NVDA, 24% in PLTR, 16% in VCIT, 14% in
+VEA, 11% in IBM and 10% in QBTS, and **zero** in the other 12 holdings.
+
+*Table 3.2 — Out-of-sample: re-optimised every month using only the trailing 3 years (Feb 2018 – Nov 2026, net of costs)*
+
+| Strategy | CAGR | Volatility | Sharpe | Max drawdown | Beta | Turnover / yr |
+|---|---:|---:|---:|---:|---:|---:|
+| **Equal weight** | **22.2%** | 23.8% | **0.85** | −36.5% | 1.09 | 39% |
+| Max Sharpe (rolling) | 17.3% | 25.8% | 0.64 | −48.9% | 1.07 | 132% |
+| Min vol (rolling) | 8.5% | 14.1% | 0.46 | −30.3% | 0.68 | 38% |
+| VOO (S&P 500) | 13.7% | 19.1% | 0.63 | −34.0% | 1.00 | — |
+
+![Out-of-sample growth](../results/figures/p2_oos_growth.png)
+
+**Interpretation.**
+1. **In hindsight, optimisation looks like a big win.** The Sharpe ratio rises
+   from 1.46 to 1.81. The current portfolio sits well inside the frontier,
+   i.e. the same return was available with less risk.
+2. **Without hindsight, the win disappears.** Re-optimising every month on
+   data available at the time produced a *lower* Sharpe ratio than simply
+   holding equal weights (0.64 vs 0.85). It also had a deeper drawdown (−48.9%)
+   and over three times the trading. The optimiser kept chasing whichever
+   holdings had done best over the previous 3 years, just before many of them
+   cooled off.
+3. **Practical takeaway.** Raw mean-variance optimisation on historical
+   averages should **not** be used to set the weights here. Equal weight is a
+   tough, cheap benchmark (DeMiguel, Garlappi & Uppal, 2009 reach the same
+   conclusion across many datasets). Phases 3–5 test whether better
+   *forecasts* (instead of historical averages) can beat it.
+4. Min-volatility does what it promises (lowest risk, smallest drawdown), but
+   with a much lower return. It is an option only if lower risk is the
+   priority.
 
 ---
 
@@ -343,7 +477,7 @@ time.
 
 ## References
 
-Black & Litterman (1992), *FAJ*; Grinold & Kahn (2000), *Active Portfolio
+Black & Litterman (1992), *FAJ*; DeMiguel, Garlappi & Uppal (2009), *Review of Financial Studies*; Grinold & Kahn (2000), *Active Portfolio
 Management*; He & Litterman (1999); Ledoit & Wolf (2004), *J. Multivariate
 Analysis*; López de Prado (2018), *Advances in Financial Machine Learning*;
 Markowitz (1952), *J. Finance*; Shumway & Stoffer (2017), *Time Series

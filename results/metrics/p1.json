@@ -1,0 +1,97 @@
+{
+  "data_quality_flags": {
+    "QBTS": "STALE_RUN;EXTREME_MOVE;",
+    "OKLO": "EXTREME_MOVE;",
+    "SKYT": "SHORT_HISTORY;STOPPED_TRADING;",
+    "PSKY": "SHORT_HISTORY;STOPPED_TRADING;"
+  },
+  "assets_full_3y": [
+    "QBTS",
+    "PLTR",
+    "HON",
+    "IBM",
+    "NVDA",
+    "MSFT",
+    "META",
+    "AMZN",
+    "VOO",
+    "VTI",
+    "VEA",
+    "VB",
+    "VO",
+    "VWO",
+    "VCIT",
+    "QTUM",
+    "JD",
+    "WDAY"
+  ],
+  "portfolio_vs_benchmark": {
+    "Portfolio (EW)": {
+      "start": "2016-01-04",
+      "end": "2026-11-03",
+      "years": 10.81,
+      "CAGR": 0.23715467112162947,
+      "Volatility": 0.22142445359101212,
+      "Sharpe": 0.967344422773454,
+      "Sortino": 1.4079701890598206,
+      "Max Drawdown": -0.36518150333386235,
+      "Calmar": 0.6494158903355353,
+      "VaR 95% (1d)": 0.02172269703952141,
+      "CVaR 95% (1d)": 0.031134236929937404,
+      "Skew": -0.0812228606981195,
+      "Excess Kurtosis": 5.944797696452827,
+      "Beta": 1.088816059884487,
+      "Alpha (ann.)": 0.07238430995590672,
+      "Tracking Error": 0.10954187992294707,
+      "Info Ratio": 0.7663755430722807
+    },
+    "VOO (S&P 500)": {
+      "start": "2016-01-04",
+      "end": "2026-11-03",
+      "years": 10.81,
+      "CAGR": 0.14760081393223,
+      "Volatility": 0.17730369376104535,
+      "Sharpe": 0.7344707507756546,
+      "Sortino": 1.0307742131874555,
+      "Max Drawdown": -0.33992981516636245,
+      "Calmar": 0.43420967313500825,
+      "VaR 95% (1d)": 0.016423883250512243,
+      "CVaR 95% (1d)": 0.026919382983892057,
+      "Skew": -0.3651973276315184,
+      "Excess Kurtosis": 15.651883132616955,
+      "Beta": 1.0000000000000002,
+      "Alpha (ann.)": -2.7321894746634712e-17,
+      "Tracking Error": 0.0,
+      "Info Ratio": NaN
+    }
+  },
+  "diversification": {
+    "avg_pairwise_corr": 0.3810260156063717,
+    "diversification_ratio": 1.653472985637821,
+    "effective_n_bets": 2.73397291423405,
+    "most_correlated_pair": [
+      [
+        "VTI",
+        "VOO"
+      ],
+      0.9957841205887407
+    ],
+    "least_correlated_pair": [
+      [
+        "JD",
+        "WDAY"
+      ],
+      0.06877733117437528
+    ]
+  },
+  "adf": {
+    "prices_stationary": 0,
+    "returns_stationary": 20,
+    "n": 20
+  },
+  "ljung_box": {
+    "returns_autocorrelated": 15,
+    "vol_clustering": 18,
+    "n": 18
+  }
+}

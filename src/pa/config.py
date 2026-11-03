@@ -37,6 +37,21 @@ BENCHMARK = "VOO"
 # trading on each date. Replace with real weights here if they become known.
 CURRENT_WEIGHTS: dict[str, float] | None = None
 
+# --- Data overrides (each one is documented in the report, §1.3) -----------
+# Yahoo carries the pre-merger SPAC shell (~$10 trust value) under the new
+# ticker. Those prices say nothing about the operating company, so history
+# starts on the first day the merged company traded.
+TRADING_START = {
+    "QBTS": "2022-08-08",   # D-Wave / DPCM Capital merger closed 2022-08-05
+    "OKLO": "2024-05-10",   # Oklo / AltC Acquisition merger closed 2024-05-09
+}
+# Holdings whose Yahoo history is too broken to analyse; excluded from every
+# calculation (still listed in the data-quality table).
+EXCLUDE = {
+    "SKYT": "Yahoo returns a single price (2026-07-30); no usable history",
+    "PSKY": "Yahoo returns only 15 scattered prices (2026-07-29 to 2026-10-16)",
+}
+
 # Market-context series (features + risk-free rate).
 MARKET_TICKERS = ["^VIX", "^TNX", "^IRX"]          # Yahoo symbols
 FRED_SERIES = {

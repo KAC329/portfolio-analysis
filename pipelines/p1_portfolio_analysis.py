@@ -20,7 +20,14 @@ def main():
     res = {}
 
     # 1. Data quality --------------------------------------------------------
-    q = quality_report(close, volume)
+    from pa.data import load_prices
+    raw_close, raw_vol = load_prices(raw=True)
+    q = quality_report(raw_close, raw_vol)
+    q["treatment"] = ""
+    for t, d in C.TRADING_START.items():
+        q.loc[t, "treatment"] = f"history starts {d} (pre-merger SPAC removed)"
+    for t, why in C.EXCLUDE.items():
+        q.loc[t, "treatment"] = f"EXCLUDED: {why}"
     to_md(q, "p1_data_quality", pct_cols=set())
     res["data_quality_flags"] = q[q["flag"] != ""]["flag"].to_dict()
 
@@ -144,9 +151,13 @@ def main():
     axes[2].set_title("ACF of squared returns (volatility)")
     for a in axes:
         a.set_xlabel("Lag (trading days)")
+        from matplotlib.collections import PolyCollection
         for coll in a.collections:
-            coll.set_facecolor(GRID)
-    savefig(fig, "p1_acf_pacf")
+            if isinstance(coll, PolyCollection):          # the 95% confidence band
+                coll.set_facecolor("#cde2fb")
+                coll.set_alpha(0.8)
+        a.set_ylim(-0.3, 0.6)
+    savefig(fig, "p1_acf_pacf", source="Shaded band = 95% confidence interval; bars outside it are statistically significant. Source: Yahoo Finance; author calculations.")
 
     lb = []
     for t in full3:
