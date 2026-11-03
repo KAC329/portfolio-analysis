@@ -4,8 +4,8 @@ An end-to-end quantitative finance project analyzing a real 22-asset
 portfolio through classical time series methods, mean-variance optimization, 
 and deep learning-based trading signal generation — built as a direct 
 extension of Shumway & Stoffer's Time Series Analysis and Its Applications 
-(Chapters 1-3). Data sourced from Yahoo Finance, WRDS/OptionMetrics, 
-LSEG Machine Readable News, and Bloomberg Terminal.
+(Chapters 1-3). Built entirely on free data: Yahoo Finance, FRED and a 
+Bigdata.com market snapshot.
 
 ---
 
@@ -25,15 +25,14 @@ LSEG Machine Readable News, and Bloomberg Terminal.
 - Maximum Sharpe and minimum volatility portfolio construction
 - Current vs optimized weight comparison
 
-### Phase 3 — Quant-Grade Signal Research (In Progress)
+### Phase 3 — Quant-Grade Signal Research
 - Feature library construction: price, volume, options, sentiment, macro
 - Information coefficient (IC) analysis at multiple lags
 - Signal decay and regime analysis
 - XGBoost as primary model for tabular financial features
 - LSTM and Transformer for sequential price modeling
 - Walk-forward validation — no single train/test split
-- Data sources: OptionMetrics via WRDS, LSEG Machine Readable News, 
-  Bloomberg Terminal exports
+- Free data only: Yahoo Finance price/volume, FRED macro series
 
 ### Phase 4 — Risk Management & Position Sizing
 - Kelly criterion for optimal position sizing based on model edge
@@ -73,54 +72,54 @@ quantitative research practice.
 
 ---
 
+## Report
+
+📄 **[docs/REPORT.md](docs/REPORT.md)** is the full research write-up (executive summary, method,
+results, interpretation and caveats for each phase, with plain-English explainers).
+
+---
+
 ## Tech Stack
 
-- **Python 3.10+**
-- `yfinance` — baseline price and volume data
-- `pandas`, `numpy` — data manipulation
-- `matplotlib`, `seaborn` — visualization
-- `statsmodels` — ARIMA, ADF testing, ACF/PACF
-- `scipy` — portfolio optimization
-- `PyTorch` — LSTM and Transformer models
-- `xgboost` — gradient boosted trees for tabular signal modeling
-- `scikit-learn` — preprocessing, evaluation, walk-forward validation
-- **WRDS/OptionMetrics** — historical options data (IV, put/call ratio, skew)
-- **LSEG Machine Readable News** — professional news sentiment scores
-- **Bloomberg Terminal** — implied volatility history, options flow
+- **Python 3.10+** · `pandas`, `numpy`, `scipy`, `statsmodels`, `scikit-learn`, `xgboost`, `PyTorch`, `matplotlib`
+- **Data (free):** Yahoo Finance via `yfinance` (prices, volume, VIX, Treasury yields), FRED (T-bill, term and credit spreads),
+  [Bigdata.com](https://bigdata.com) snapshot (market caps, ETF AUM, analyst targets, sentiment)
 
 ---
 
 ## Repository Structure
 
 ```
-quantitative-portfolio-analysis/
-│
-├── notebooks/
-│   ├── 01_portfolio_analysis.ipynb         # Phase 1
-│   ├── 02_portfolio_optimization.ipynb     # Phase 2
-│   ├── 03_deep_learning_signals.ipynb      # Phase 3 (prototype)
-│   ├── 04_qbts_feature_study.ipynb         # Phase 3 feature research
-│   ├── 05_quant_signal_research.ipynb      # Phase 3 redesign (in progress)
-│   ├── 06_risk_management.ipynb            # Phase 4 (planned)
-│   └── 07_black_litterman.ipynb            # Phase 5 (planned)
-│
-├── data/                                   # Cached and exported data
-├── models/                                 # Saved model weights
-├── results/                                # Charts, tables, backtest results
-├── requirements.txt
-└── README.md
+portfolio-analysis/
+├── src/pa/                     # Library: config, data, metrics, backtest, optimize,
+│                               #   features, models, risk, bl (Black-Litterman)
+├── pipelines/
+│   ├── p1_portfolio_analysis.py   # Phase 1
+│   ├── p2_optimization.py         # Phase 2
+│   ├── p3_signal_research.py      # Phase 3 (walk-forward models)
+│   ├── p4_risk_management.py      # Phase 4
+│   ├── p5_black_litterman.py      # Phase 5
+│   └── improve.py                 # Self-improvement loop (champion/challenger)
+├── tests/                      # Unit tests incl. look-ahead-bias tests
+├── data/snapshots/             # Point-in-time snapshots (Bigdata.com)
+├── results/{figures,tables,metrics}/
+├── docs/REPORT.md
+├── run_all.sh
+└── requirements.txt
 ```
+
 ---
 
 ## Data Sources
 
 | Source | Access | Data |
 |---|---|---|
-| Yahoo Finance | Free, remote | Price, volume |
-| WRDS/OptionMetrics | Stevens HFSC | Historical options, IV, put/call |
-| LSEG Machine Readable News | Stevens HFSC | News sentiment scores |
-| Bloomberg Terminal | Stevens HFSC (on-site) | IV history, options flow |
-| S&P Capital IQ | Stevens HFSC | Earnings surprise, short interest |
+| Yahoo Finance (`yfinance`) | Free | Adjusted prices, volume, VIX, Treasury yields |
+| FRED | Free, no key | 3-month T-bill, 10y–2y spread, Baa credit spread |
+| Bigdata.com (plugin) | Plugin | Market caps, ETF AUM, analyst targets, EPS surprises, news sentiment (snapshot) |
+
+Institutional sources from the original plan (WRDS/OptionMetrics, LSEG, Bloomberg, Capital IQ) are no longer
+available, so Phase 3 uses price, volume and macro features only.
 
 ---
 
@@ -128,21 +127,23 @@ quantitative-portfolio-analysis/
 
 | Phase | Status |
 |---|---|
-| Phase 1 — Portfolio Analysis | Complete |
-| Phase 2 — Portfolio Optimization | Complete |
-| Phase 3 — Signal Research | In Progress — awaiting WRDS access |
-| Phase 4 — Risk Management | Planned |
-| Phase 5 — Black-Litterman | Planned |
+| Pipeline, tests, report framework | ✅ Built, 11 tests passing |
+| Phase 1 — Portfolio Analysis | ⏳ Code ready, awaiting price data |
+| Phase 2 — Portfolio Optimization | ⏳ Code ready, awaiting price data |
+| Phase 3 — Signal Research | ⏳ Code ready, awaiting price data |
+| Phase 4 — Risk Management | ⏳ Code ready, awaiting price data |
+| Phase 5 — Black-Litterman | ⏳ Code ready, awaiting price data |
 
 ---
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/quantitative-portfolio-analysis.git
-cd quantitative-portfolio-analysis
+git clone https://github.com/KAC329/portfolio-analysis.git
+cd portfolio-analysis
 pip install -r requirements.txt
-jupyter notebook notebooks/
+./run_all.sh --refresh      # download data, run tests, run all five phases
+python pipelines/improve.py --trials 3   # one self-improvement iteration
 ```
 
 ---
