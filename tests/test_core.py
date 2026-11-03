@@ -77,3 +77,16 @@ def test_walk_forward_has_no_lookahead(synthetic, monkeypatch):
     p2 = oos(close2)
     d = p1.index.get_level_values("date") <= cut
     pd.testing.assert_series_equal(p1[d], p2.reindex(p1.index)[d])
+
+
+def test_daily_ic_matches_scipy_spearman():
+    from scipy import stats
+    from pa.models import daily_ic
+    rng = np.random.default_rng(1)
+    idx = pd.MultiIndex.from_product([pd.bdate_range("2020-01-01", periods=30), list("ABCDEFGH")],
+                                     names=["date", "ticker"])
+    df = pd.DataFrame({"pred": rng.normal(size=len(idx)), "target_xs": rng.normal(size=len(idx))}, index=idx)
+    df.iloc[3, 0] = np.nan
+    ic = daily_ic(df)
+    ref = df.dropna().groupby(level="date").apply(lambda g: stats.spearmanr(g.pred, g.target_xs).statistic)
+    assert np.allclose(ic.to_numpy(), ref.to_numpy())

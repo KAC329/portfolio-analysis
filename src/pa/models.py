@@ -274,12 +274,18 @@ def walk_forward(panel: pd.DataFrame, cfg: WFConfig, raw_returns: pd.DataFrame |
 
 # ------------------------------------------------------------- scoring
 def daily_ic(df: pd.DataFrame, pred: str = "pred", target: str = "target_xs") -> pd.Series:
-    def _ic(g):
-        g = g[[pred, target]].dropna()
-        if len(g) < 5 or g[pred].nunique() < 2:
-            return np.nan
-        return stats.spearmanr(g[pred], g[target]).statistic
-    return df.groupby(level="date").apply(_ic).dropna()
+    """Spearman rank IC per date, vectorised (Pearson correlation of within-date ranks)."""
+    d = df[[pred, target]].dropna()
+    g = d.groupby(level="date")
+    n = g[pred].transform("size")
+    r = g.rank()
+    r = r - r.groupby(level="date").transform("mean")
+    xy = (r[pred] * r[target]).groupby(level="date").sum()
+    xx = (r[pred] ** 2).groupby(level="date").sum()
+    yy = (r[target] ** 2).groupby(level="date").sum()
+    ic = xy / np.sqrt(xx * yy)
+    ok = (n.groupby(level="date").first() >= 5) & (xx > 0) & (yy > 0)
+    return ic[ok].dropna()
 
 
 def score(df: pd.DataFrame, pred: str = "pred", target: str = "target_xs") -> dict:
