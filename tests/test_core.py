@@ -90,3 +90,10 @@ def test_daily_ic_matches_scipy_spearman():
     ic = daily_ic(df)
     ref = df.dropna().groupby(level="date").apply(lambda g: stats.spearmanr(g.pred, g.target_xs).statistic)
     assert np.allclose(ic.to_numpy(), ref.to_numpy())
+
+
+def test_max_sharpe_falls_back_when_nothing_beats_cash():
+    mu = pd.Series([0.01, 0.02], index=["A", "B"])
+    cov = pd.DataFrame([[0.04, 0.0], [0.0, 0.09]], index=mu.index, columns=mu.index)
+    w = optimize.max_sharpe(mu, cov, rf=0.05, cap=1.0)
+    assert w.to_numpy() == pytest.approx(optimize.min_vol(mu, cov, cap=1.0).to_numpy())

@@ -156,7 +156,8 @@ def main():
     if "xgb" in a.models:
         res["xgb_importance_top"] = xgb_importance(panel, params).sort_values(ascending=False).head(8).to_dict()
     res["scores"] = results
-    best = max((m for m in results if m != "momentum"),
+    # the zero-parameter baseline competes too: a model must earn its complexity
+    best = max(results,
                key=lambda m: results[m]["validation"].get("ICIR_ann", -np.inf))
     res["best_model_by_validation"] = best
     save_json(res, "p3" if a.tag == "baseline" else f"p3_{a.tag}")

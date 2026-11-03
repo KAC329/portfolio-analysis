@@ -127,12 +127,13 @@ available, so Phase 3 uses price, volume and macro features only.
 
 | Phase | Status |
 |---|---|
-| Pipeline, tests, report framework | ✅ Built, 11 tests passing |
-| Phase 1 — Portfolio Analysis | ⏳ Code ready, awaiting price data |
-| Phase 2 — Portfolio Optimization | ⏳ Code ready, awaiting price data |
-| Phase 3 — Signal Research | ⏳ Code ready, awaiting price data |
-| Phase 4 — Risk Management | ⏳ Code ready, awaiting price data |
-| Phase 5 — Black-Litterman | ⏳ Code ready, awaiting price data |
+| Pipeline, tests, report framework | ✅ 13 tests passing |
+| Phase 1 — Portfolio Analysis | ✅ Complete (real data, Jan 2015 – Nov 2026) |
+| Phase 2 — Portfolio Optimization | ✅ Complete |
+| Phase 3 — Signal Research | ✅ Complete: momentum is the champion; ML models under improvement |
+| Phase 4 — Risk Management | ✅ Complete |
+| Phase 5 — Black-Litterman | ✅ Complete |
+| Self-improvement loop | 🔄 Running (see `results/metrics/checkins.md`) |
 
 ---
 

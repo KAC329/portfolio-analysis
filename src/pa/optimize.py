@@ -55,9 +55,16 @@ def _solve(objective, n, bounds, extra_cons=()):
 
 
 def max_sharpe(mu, cov, rf=0.0, cap: float = MAX_WEIGHT) -> pd.Series:
+    """Tangency portfolio. If no holding is expected to beat cash (the Sharpe
+    ratio is negative everywhere) or the solver fails, fall back to min-vol."""
     m, S = mu.to_numpy(), cov.to_numpy()
+    if (m - rf).max() <= 0:
+        return min_vol(mu, cov, cap)
     cap = max(cap, 1 / len(m))
-    w = _solve(lambda w: -(w @ m - rf) / np.sqrt(w @ S @ w), len(m), [(0, cap)] * len(m))
+    try:
+        w = _solve(lambda w: -(w @ m - rf) / np.sqrt(w @ S @ w), len(m), [(0, cap)] * len(m))
+    except RuntimeError:
+        return min_vol(mu, cov, cap)
     return pd.Series(w, index=mu.index)
 
 
