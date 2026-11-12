@@ -1,0 +1,108 @@
+{
+  "model": "momentum",
+  "strength": 0.5,
+  "table": {
+    "Equal weight (current)": {
+      "CAGR": 0.22172285937541658,
+      "Volatility": 0.23785377759755186,
+      "Sharpe": 0.8469202451239358,
+      "Sortino": 1.233555576750771,
+      "Max Drawdown": -0.3651815033338619,
+      "Calmar": 0.6071579676167488,
+      "Beta": 1.086921609600481,
+      "Sharpe (hold-out)": -0.29083677197614105,
+      "Turnover (ann.)": 0.3912701764177415,
+      "Cost drag (ann.)": 0.000587222893090423,
+      "Avg invested": 1.0,
+      "Time de-risked": 0.0
+    },
+    "Signal tilt": {
+      "CAGR": 0.24076965532805694,
+      "Volatility": 0.25511883770367233,
+      "Sharpe": 0.8668219433716133,
+      "Sortino": 1.2709476773998223,
+      "Max Drawdown": -0.3687400380936642,
+      "Calmar": 0.6529522982445934,
+      "Beta": 1.138302713741691,
+      "Sharpe (hold-out)": -0.49098601877568465,
+      "Turnover (ann.)": 1.7809667258102049,
+      "Cost drag (ann.)": 0.0020578893614609708,
+      "Avg invested": 1.0,
+      "Time de-risked": 0.0
+    },
+    "Signal tilt + vol target + DD stop": {
+      "CAGR": 0.1228068786331924,
+      "Volatility": 0.14749160768460715,
+      "Sharpe": 0.6750748943729483,
+      "Sortino": 0.9462558130122725,
+      "Max Drawdown": -0.23537337533992975,
+      "Calmar": 0.521753484037151,
+      "Beta": 0.6172682031356761,
+      "Sharpe (hold-out)": -0.5959542276037697,
+      "Turnover (ann.)": 1.425507386462362,
+      "Cost drag (ann.)": 0.0014272982128675556,
+      "Avg invested": 0.6244179518602337,
+      "Time de-risked": 0.1708314402544298
+    },
+    "Half-Kelly + vol target + DD stop": {
+      "CAGR": 0.09170383080610778,
+      "Volatility": 0.14673129835789758,
+      "Sharpe": 0.48623854435550007,
+      "Sortino": 0.6718404376919018,
+      "Max Drawdown": -0.22772789869708,
+      "Calmar": 0.4026903656986303,
+      "Beta": 0.6344805752461281,
+      "Sharpe (hold-out)": -0.022970840712235596,
+      "Turnover (ann.)": 5.673446176795306,
+      "Cost drag (ann.)": 0.0036249152960927625,
+      "Avg invested": 0.7176404174482528,
+      "Time de-risked": 0.24352567014993184
+    },
+    "EW + vol target + DD stop": {
+      "CAGR": 0.08968567370028513,
+      "Volatility": 0.14578801132710387,
+      "Sharpe": 0.47577982421964177,
+      "Sortino": 0.6597585872708603,
+      "Max Drawdown": -0.22543962670634676,
+      "Calmar": 0.39782568402274693,
+      "Beta": 0.6082469859464569,
+      "Sharpe (hold-out)": -0.4915168176755292,
+      "Turnover (ann.)": 0.7366320060502528,
+      "Cost drag (ann.)": 0.0007662622253367865,
+      "Avg invested": 0.6684277437072732,
+      "Time de-risked": 0.23125851885506588
+    },
+    "VOO (S&P 500)": {
+      "CAGR": 0.13715250327039508,
+      "Volatility": 0.19074941016801025,
+      "Sharpe": 0.6269987476875837,
+      "Sortino": 0.8776084621898719,
+      "Max Drawdown": -0.33992981516636234,
+      "Calmar": 0.4034730028116903,
+      "Beta": 1.0000000000000004,
+      "Sharpe (hold-out)": 0.6462298625538054,
+      "Turnover (ann.)": NaN,
+      "Cost drag (ann.)": NaN,
+      "Avg invested": NaN,
+      "Time de-risked": NaN
+    }
+  },
+  "cost_sensitivity": {
+    "0x costs": {
+      "Sharpe": 0.7301531507140219,
+      "CAGR": 0.13174495592318336
+    },
+    "1x costs": {
+      "Sharpe": 0.7205506189348428,
+      "CAGR": 0.13013801412360215
+    },
+    "2x costs": {
+      "Sharpe": 0.7109445283179971,
+      "CAGR": 0.1285332777338959
+    },
+    "4x costs": {
+      "Sharpe": 0.6853112767726951,
+      "CAGR": 0.12422380339821082
+    }
+  }
+}

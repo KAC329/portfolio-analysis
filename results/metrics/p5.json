@@ -1,0 +1,50 @@
+{
+  "backtest": {
+    "Black-Litterman (model views)": {
+      "CAGR": 0.2523556141122225,
+      "Volatility": 0.24117352431095454,
+      "Sharpe": 0.9376334876884378,
+      "Max Drawdown": -0.3638491372410938,
+      "Beta": 1.0758138605435195,
+      "Info Ratio": 0.702326358456436,
+      "Sharpe (hold-out)": -0.5126539701394693
+    },
+    "Max Sharpe on historical means": {
+      "CAGR": 0.2626748908186012,
+      "Volatility": 0.26499406380269275,
+      "Sharpe": 0.9069908558464368,
+      "Max Drawdown": -0.3796122616340676,
+      "Beta": 1.029299692664669,
+      "Info Ratio": 0.5771802548205293,
+      "Sharpe (hold-out)": -0.47074028539310503
+    },
+    "Equal weight (current)": {
+      "CAGR": 0.26349938190407074,
+      "Volatility": 0.24157007628766516,
+      "Sharpe": 0.9732214829113935,
+      "Max Drawdown": -0.36518150333386223,
+      "Beta": 1.0858296644659255,
+      "Info Ratio": 0.788581274231501,
+      "Sharpe (hold-out)": -0.29083677197614105
+    },
+    "VOO (S&P 500)": {
+      "CAGR": 0.15974052746302037,
+      "Volatility": 0.1925021697902237,
+      "Sharpe": 0.7206885083722149,
+      "Max Drawdown": -0.3399298151663621,
+      "Beta": 0.9999999999999997,
+      "Info Ratio": NaN,
+      "Sharpe (hold-out)": 0.6462298625538054
+    }
+  },
+  "avg_trailing_ic_used": 0.034690105497415955,
+  "model": "momentum",
+  "as_of": "2026-11-03",
+  "trailing_ic": -0.013144965588574612,
+  "omega_scale": 1.0,
+  "excluded_from_recommendation": [
+    "PSKY",
+    "SKYT",
+    "VO"
+  ]
+}

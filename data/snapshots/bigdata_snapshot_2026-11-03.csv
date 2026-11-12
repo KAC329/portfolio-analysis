@@ -1,0 +1,23 @@
+ticker,name,type,rp_entity_id,price,price_currency,price_as_of,market_cap_or_aum_usd,size_measure,analyst_target_mean,analyst_target_median,sentiment,data_flag
+QBTS,D-Wave Quantum Inc.,COMPANY,3I24EZ,10.3251,USD,2026-11-03,3798385868,market_cap,36.14,35,-0.38,
+OKLO,Oklo Inc.,COMPANY,B14461,23.16,USD,2026-11-03,4375135128,market_cap,63.33,55,0.02,
+PLTR,Palantir Technologies Inc.,COMPANY,F1C69A,173.1216,USD,2026-11-03,410308621400,market_cap,216.61,234,-0.07,
+SOLS,Solstice Advanced Materials Inc.,COMPANY,TGONAJ,49.25,USD,2025-10-29,7817163895,market_cap,,,0.15,STALE_PRICE (when-issued ticker SOLSV)
+HON,Honeywell International Inc.,COMPANY,FF6644,223.885,USD,2026-11-03,70921666038,market_cap,256.92,256,0.20,
+IBM,IBM Corp.,COMPANY,8D4486,250.26,USD,2026-11-03,238652454471,market_cap,271.07,265,-0.11,
+NVDA,NVIDIA Corp.,COMPANY,E09E2B,208.5358,USD,2026-11-03,4869646000000,market_cap,339.17,325,-0.02,
+MSFT,Microsoft Corp.,COMPANY,228D42,516.215,USD,2026-11-03,3765969472800,market_cap,611.74,625,-0.21,
+META,Meta Platforms Inc.,COMPANY,12E454,621.46,USD,2026-11-03,1343585383100,market_cap,834.36,862.5,-0.53,
+AMZN,Amazon.com Inc.,COMPANY,0157B1,248.0,USD,2026-11-03,2649438869000,market_cap,328.48,329,-0.34,
+SKYT,Skywater Technology Inc.,COMPANY,1C4FBD,32.46,USD,2026-07-31,1597181381,market_cap,29,35,0.54,STALE_PRICE since 2026-07-31; Bigdata.com lists as PRIVATE - verify listing status
+JD,JD.com Inc.,COMPANY,3188EC,107.3,HKD,2026-11-03,31469580000,market_cap,,,0.02,Cap converted from HKD 244.84B at 7.78 HKD/USD; quote is 9618.HK not US ADR
+WDAY,Workday Inc.,COMPANY,4B7006,198.945,USD,2026-11-03,47749331585,market_cap,201.85,210,-0.16,
+PSKY,Paramount Skydance,COMPANY,,,,,,market_cap,,,,NOT_RESOLVED in Bigdata.com
+VOO,Vanguard S&P 500 ETF,ETF,384423,694.23,USD,2026-11-03,1000000000000,aum,,,,
+VTI,Vanguard Total Stock Market ETF,ETF,FC8D75,371.81,USD,2026-11-03,689200000000,aum,,,,
+VEA,Vanguard FTSE Developed Markets ETF,ETF,989F7A,69.45,USD,2026-11-03,231600000000,aum,,,,
+VB,Vanguard Small-Cap ETF,ETF,812B3B,293.87,USD,2026-11-03,76900000000,aum,,,,
+VO,Vanguard Mid-Cap ETF,ETF,9A76C0,,,,,aum,,,,NOT_AVAILABLE in Bigdata.com ETF tearsheet
+VWO,Vanguard FTSE Emerging Markets ETF,ETF,1F903A,55.45,USD,2026-11-03,125400000000,aum,,,,
+VCIT,Vanguard Intermediate-Term Corp Bond ETF,ETF,A4B07F,79.14,USD,2026-11-03,66600000000,aum,,,,
+QTUM,Defiance Quantum ETF,ETF,OE1OMI,132.71,USD,2026-11-03,5060000000,aum,,,,

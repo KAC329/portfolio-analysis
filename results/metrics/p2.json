@@ -1,0 +1,105 @@
+{
+  "universe": [
+    "QBTS",
+    "PLTR",
+    "HON",
+    "IBM",
+    "NVDA",
+    "MSFT",
+    "META",
+    "AMZN",
+    "VOO",
+    "VTI",
+    "VEA",
+    "VB",
+    "VO",
+    "VWO",
+    "VCIT",
+    "QTUM",
+    "JD",
+    "WDAY"
+  ],
+  "excluded_short_history": [
+    "OKLO",
+    "PSKY",
+    "SKYT",
+    "SOLS"
+  ],
+  "rf_ann": 0.04394806819305432,
+  "window": [
+    "2023-11-03",
+    "2026-11-03"
+  ],
+  "insample": {
+    "Current (equal weight)": {
+      "ret": 0.34193635984066967,
+      "vol": 0.2046600323836584,
+      "Sharpe": 1.4560160485512021,
+      "largest": "QBTS 6%",
+      "n_holdings>1%": 18
+    },
+    "Max Sharpe": {
+      "ret": 0.6120300693331625,
+      "vol": 0.3134694051197674,
+      "Sharpe": 1.8122406584561606,
+      "largest": "NVDA 25%",
+      "n_holdings>1%": 6
+    },
+    "Min volatility": {
+      "ret": 0.14849174239453602,
+      "vol": 0.10962113318172256,
+      "Sharpe": 0.9536817506545586,
+      "largest": "VCIT 25%",
+      "n_holdings>1%": 9
+    },
+    "Best of 10,000 random": {
+      "ret": 0.5045413080801978,
+      "vol": 0.2655847299024934,
+      "Sharpe": 1.7342610023409306,
+      "largest": "",
+      "n_holdings>1%": NaN
+    }
+  },
+  "oos": {
+    "Max Sharpe (rolling)": {
+      "start": "2018-02-01",
+      "years": 8.73,
+      "CAGR": 0.17319252579534128,
+      "Volatility": 0.2583455853374702,
+      "Sharpe": 0.6421001661489518,
+      "Max Drawdown": -0.48854637027350845,
+      "Beta": 1.0699298342561494,
+      "Turnover (ann.)": 1.3174905466782616
+    },
+    "Min vol (rolling)": {
+      "start": "2018-02-01",
+      "years": 8.73,
+      "CAGR": 0.0852757698350004,
+      "Volatility": 0.14076191193824,
+      "Sharpe": 0.4589537614625804,
+      "Max Drawdown": -0.3031954613279093,
+      "Beta": 0.6776677675446634,
+      "Turnover (ann.)": 0.37971344474921137
+    },
+    "Equal weight": {
+      "start": "2018-02-01",
+      "years": 8.73,
+      "CAGR": 0.22172285937541658,
+      "Volatility": 0.23785377759755186,
+      "Sharpe": 0.8469202451239358,
+      "Max Drawdown": -0.3651815033338619,
+      "Beta": 1.086921609600481,
+      "Turnover (ann.)": 0.3912701764177415
+    },
+    "VOO (S&P 500)": {
+      "start": "2018-02-01",
+      "years": 8.73,
+      "CAGR": 0.13715250327039508,
+      "Volatility": 0.19074941016801025,
+      "Sharpe": 0.6269987476875837,
+      "Max Drawdown": -0.33992981516636234,
+      "Beta": 1.0000000000000004,
+      "Turnover (ann.)": NaN
+    }
+  }
+}
