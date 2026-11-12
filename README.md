@@ -42,7 +42,7 @@ weight, rebalanced monthly; real position sizes were not used.
 4. **Simple beats complex.** 12-1 momentum was the only signal with validated
    predictive power (IC 0.045, t-stat 2.2). Ridge, XGBoost, LSTM and an
    ensemble did not beat it. In the untouched hold-out year, no signal worked.
-5. **Risk overlays act as a seatbelt, not an engine.** Volatility targeting
+5. **Risk overlays.** Volatility targeting
    plus a drawdown stop cut the worst drawdown from −36.5% to −23.5%, at the
    cost of a lower Sharpe ratio.
 6. **Black-Litterman adds no tilt today.** It scales the model's views by the
